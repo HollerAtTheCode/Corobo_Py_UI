@@ -9,7 +9,7 @@ class Game:
         self.width = 1200
         self.height = 860
         self.win = pygame.display.set_mode((self.width, self.height))
-        self.bg = pygame.image.load(os.path.join('assets', 'bg_default.png'))
+        self.bg = pygame.image.load("assets/bg_default.png")
         self.bg = pygame.transform.scale(self.bg, (self.width, self.height))
         self.clicks = []
         self.tiles = []
