@@ -1,9 +1,10 @@
 import pygame
 import os
-
 from tiles.tile import Tile
 from board.board import Board
 import tuio
+import keyboard
+
 
 
 class Listener(tuio.observer.AbstractListener):
@@ -23,10 +24,11 @@ class Listener(tuio.observer.AbstractListener):
 class Game:
 
     def __init__(self):
-        self.width = 1200  # height of field from OS--- getSize oder so
-        self.height = 900
-
-        self.win = pygame.display.set_mode((self.width, self.height))
+        pygame.init()
+        self.info_objekt = pygame.display.Info()
+        self.width = self.info_objekt.current_w  # height of field from OS--- getSize oder so
+        self.height = self.info_objekt.current_h
+        self.win = pygame.display.set_mode((self.width, self.height),pygame.FULLSCREEN|pygame.HWSURFACE)
         self.board = Board(self.width, self.height)
         self.tiles = {}  # contains every tile on the field
         self.poses = {}  # contains the current poses of every tile on the field
@@ -51,10 +53,14 @@ class Game:
                     else:
                         self.tiles[key].update(temp[0] * self.width, temp[1] * self.height)
             # print(len(self.poses), self.poses)
-            for event in pygame.event.get():  # unused so far maybe later vor mouse or touch input to select level
 
-                if event.type == pygame.QUIT:
-                    run = False
+            events = pygame.event.get()
+            for event in events:
+                if event.type == pygame.KEYDOWN:
+                    if event.key==pygame.K_q:
+                        pygame.quit()
+                        exit()
+
 
             self.draw()
         pygame.quit()
