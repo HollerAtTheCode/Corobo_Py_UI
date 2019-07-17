@@ -76,22 +76,26 @@ class Board:
 
     def draw_board(self,win):
 
+        x_offset = (self.width-self.NumberOfColumns*90)/2
+        y_offset = (self.height-self.NumberOfRows*90)/2
+
         red = (255, 0, 0)
         green = (0, 255, 0)
         blue = (0, 0, 255)
         white = (255, 255, 255)
         black = (0, 0, 0)
 
+
         for field in self.fields.values():
             if field.type == 1:  # blue
-                pygame.draw.rect(win, blue, [field.x_px, field.y_px, field.width, field.height])
-                pygame.draw.rect(win, black, [field.x_px, field.y_px, field.width, field.height], 1)
+                pygame.draw.rect(win, blue, [field.x_px + x_offset, field.y_px + y_offset, field.width, field.height])
+                pygame.draw.rect(win, black, [field.x_px + x_offset, field.y_px + y_offset, field.width, field.height], 1)
             elif field.type == 2:  # green
-                pygame.draw.rect(win, green, [field.x_px, field.y_px, field.width, field.height])
-                pygame.draw.rect(win, black, [field.x_px, field.y_px, field.width, field.height], 1)
+                pygame.draw.rect(win, green, [field.x_px + x_offset, field.y_px + y_offset, field.width, field.height])
+                pygame.draw.rect(win, black, [field.x_px + x_offset, field.y_px + y_offset, field.width, field.height], 1)
             elif field.type == 3:  # red
-                pygame.draw.rect(win, red, [field.x_px, field.y_px, field.width, field.height])
-                pygame.draw.rect(win, black, [field.x_px, field.y_px, field.width, field.height], 1)
+                pygame.draw.rect(win, red, [field.x_px + x_offset, field.y_px + y_offset, field.width, field.height])
+                pygame.draw.rect(win, black, [field.x_px + x_offset, field.y_px + y_offset, field.width, field.height], 1)
             else:  # white
-                pygame.draw.rect(win, white, [field.x_px, field.y_px, field.width, field.height])
-                pygame.draw.rect(win, black, [field.x_px, field.y_px, field.width, field.height], 1)
+                pygame.draw.rect(win, white, [field.x_px + x_offset, field.y_px + y_offset, field.width, field.height])
+                pygame.draw.rect(win, black, [field.x_px + x_offset, field.y_px + y_offset, field.width, field.height], 1)
