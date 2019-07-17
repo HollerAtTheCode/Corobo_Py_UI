@@ -3,8 +3,6 @@ import os
 from tiles.tile import Tile
 from board.board import Board
 import tuio
-import keyboard
-
 
 
 class Listener(tuio.observer.AbstractListener):
