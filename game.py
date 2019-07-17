@@ -20,9 +20,9 @@ class Listener(tuio.observer.AbstractListener):
 
 
 class Game:
-
+    pygame.init()
     def __init__(self):
-        pygame.init()
+
         self.info_objekt = pygame.display.Info()
         self.width = self.info_objekt.current_w  # height of field from OS--- getSize oder so
         self.height = self.info_objekt.current_h
