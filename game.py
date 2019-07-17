@@ -1,9 +1,10 @@
 import pygame
 import os
-import random
+
 from tiles.tile import Tile
-from fields.field import Field
+from board.board import Board
 import tuio
+
 
 class Listener(tuio.observer.AbstractListener):
 
@@ -18,40 +19,32 @@ class Listener(tuio.observer.AbstractListener):
         pos = [x, y, rad]
         g.poses[ident] = pos
 
+
 class Game:
 
     def __init__(self):
-        self.width = 1600
+        self.width = 1200  # height of field from OS--- getSize oder so
         self.height = 900
-        # self.NumberOfRows = 13
-        # self.NumberOfColumns = 20
+
         self.win = pygame.display.set_mode((self.width, self.height))
-        self.fields = []
-
-        # self.bg = pygame.image.load(
-        #     os.path.join('assets', 'bg_default.png'))  # bg picture -> needs to be random in future
-        #
-        # self.bg = pygame.transform.scale(self.bg, (self.width, self.height))
-
+        self.board = Board(self.width, self.height)
         self.tiles = {}  # contains every tile on the field
         self.poses = {}  # contains the current poses of every tile on the field
-
 
     def run(self):
         '''
         gameloop
         :return: none
         '''
+        self.board.generate_field_array()
         run = True
         clock = pygame.time.Clock()
-
         while run:
             clock.tick(60)  # fps = 60
             tuio.tracking.update()  # update for the Tuiolistener
             if len(self.poses) != 0:
                 for key in self.poses:
                     temp = self.poses[key]  # the curren pose of the 'key', which is the same as in tiles
-
                     if key not in self.tiles:  # checks if the tile is already existing if not it'll be created
                         self.create_tile(key, temp[0] * self.width, temp[1] * self.height, temp[2])
                         print('new Tile: ', key)
@@ -72,8 +65,7 @@ class Game:
         :return: none
         '''
         self.win.fill([255, 255, 255])
-        # self.drawField()
-        # self.win.blit(self.bg, (0, 0))
+        self.board.draw_board(self.win)
         '''
         redraw every tile every tick. Tile.draw(local window)
         '''
