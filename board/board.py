@@ -33,60 +33,53 @@ class Board:
                 # blue robot square
                 if 7 < x < 12 and y < 4:  # blue
 
-                    self.generate_rect(x, y, 1)
+                    self.generate_field(x, y, 1)
                 # first and second row of playarea
                 elif 2 < x < 17 and 5 < y < 8:  # green
                     if random.randrange(1, 100) > 10:
-                        self.generate_rect(x, y, 2)
+                        self.generate_field(x, y, 2)
 
                     else:  # red
-                        self.generate_rect(x, y, 3)
+                        self.generate_field(x, y, 3)
 
                 # third row of playarea
                 elif 3 < x < 16 and y == 8:  # green
                     if random.randrange(1, 100) > 10:
-                        self.generate_rect(x, y, 2)
+                        self.generate_field(x, y, 2)
 
                     else:  # red
-                        self.generate_rect(x, y, 3)
+                        self.generate_field(x, y, 3)
 
                 # fourth row of playarea
                 elif 4 < x < 15 and y == 9:  # green
                     if random.randrange(1, 100) > 10:
-                        self.generate_rect(x, y, 2)
+                        self.generate_field(x, y, 2)
 
                     else:  # red
-                        self.generate_rect(x, y, 3)
+                        self.generate_field(x, y, 3)
 
                 # fifth row of playarea
                 elif 6 < x < 13 and y == 10:  # green
                     if random.randrange(1, 100) > 10:
-                        self.generate_rect(x, y, 2)
+                        self.generate_field(x, y, 2)
 
                     else:  # red
-                        self.generate_rect(x, y, 3)
+                        self.generate_field(x, y, 3)
 
                 # area around the playable area
                 else:  # white
-                    self.generate_rect(x, y, 0)
+                    self.generate_field(x, y, 0)
 
 
-    def generate_rect(self, x, y, type):
+    def generate_field(self, x, y, type):
         alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T']
         ident = alphabet[x] + str(y)
         temp_field = Field(ident, x, y, type)
         self.fields.update({ident: temp_field})
 
 
-    def draw_board(self,win):
 
-
-        win.blit(self.imgs[2], (60, 15))
-
-        for field in self.fields.values():
-            if field.type == 3:  # red
-                win.blit(self.imgs[0], (field.x_px, field.y_px))
-    def better_draw_board(self, win):
+    def draw_board(self, win):
 
         win.blit(self.bg,(60,15))
         for field in self.fields.values():

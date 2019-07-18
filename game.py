@@ -21,7 +21,6 @@ class Listener(tuio.observer.AbstractListener):
 
 class Game:
 
-
     def __init__(self):
 
         self.info_objekt = pygame.display.Info()
@@ -40,7 +39,6 @@ class Game:
         self.board.generate_field_array()
         run = True
         clock = pygame.time.Clock()
-
 
         while run:
             clock.tick(90)  # fps = 60
@@ -69,8 +67,7 @@ class Game:
         :return: none
         '''
         self.win.fill([255, 255, 255])
-
-        self.board.better_draw_board(self.win)
+        self.board.draw_board(self.win)
         '''
         redraw every tile every tick. Tile.draw(local window)
         '''
@@ -91,8 +88,8 @@ class Game:
         :param rot: int
         :return: none
         '''
-        ident = Tile(name, pos_x, pos_y, rot)
-        self.tiles[name] = ident
+        temp_tile = Tile(name, pos_x, pos_y, rot)
+        self.tiles[name] = temp_tile
 
 
 pygame.init()
