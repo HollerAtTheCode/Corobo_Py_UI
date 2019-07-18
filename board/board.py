@@ -12,7 +12,7 @@ class Board:
         self.NumberOfRows = 13
         self.NumberOfColumns = 20
         self.fields = {}
-        self.imgs= [pygame.image.load(os.path.join('assets/', 'road_block_1.png')), pygame.image.load(os.path.join('assets/', 'road_block_2.png'))]  # images depents on valid or non valid pos (collision())
+        self.imgs= [pygame.image.load(os.path.join('assets/', 'road_block_1.png')), pygame.image.load(os.path.join('assets/', 'road_block_2.png')), pygame.image.load(os.path.join('assets/', 'background.png'))]  # images depents on valid or non valid pos (collision())
 
 
     def generate_field_array(self):
@@ -77,15 +77,6 @@ class Board:
         self.fields.update({ident: temp_field})
 
 
-    def draw_static_board(self, win):
-
-        x_offset = (self.width-self.NumberOfColumns*90)/2 #60px
-        y_offset = (self.height-self.NumberOfRows*90)/2   #15px
-
-        for field in self.fields.values():
-            if field.type == 3:  # red
-                win.blit(self.imgs[0], (field.x_px + x_offset, field.y_px + y_offset))
-
     def draw_board(self,win):
 
         x_offset = (self.width-self.NumberOfColumns*90)/2 #60px
@@ -97,17 +88,8 @@ class Board:
         white = (255, 255, 255)
         black = (0, 0, 0)
 
+        win.blit(self.imgs[2], (60, 15))
+
         for field in self.fields.values():
-            if field.type == 1:  # blue
-                pygame.draw.rect(win, blue, [field.x_px + x_offset, field.y_px + y_offset, field.width, field.height])
-                pygame.draw.rect(win, black, [field.x_px + x_offset, field.y_px + y_offset, field.width, field.height], 1)
-            elif field.type == 2:  # green
-                pygame.draw.rect(win, green, [field.x_px + x_offset, field.y_px + y_offset, field.width, field.height])
-                pygame.draw.rect(win, black, [field.x_px + x_offset, field.y_px + y_offset, field.width, field.height], 1)
-            elif field.type == 3:  # red
-                # win.blit(self.imgs[0], (field.x_px + x_offset, field.y_px + y_offset))
-                win.blit(self.imgs[0], (field.x_px + x_offset, field.y_px + y_offset))
-            else:  # white
-                # win.blit(self.imgs[0], (field.x_px + x_offset, field.y_px + y_offset))
-                pygame.draw.rect(win, white, [field.x_px + x_offset, field.y_px + y_offset, field.width, field.height])
-                pygame.draw.rect(win, black, [field.x_px + x_offset, field.y_px + y_offset, field.width, field.height], 1)
+            if field.type == 3:  # red
+                win.blit(self.imgs[0], (field.x_px, field.y_px))
