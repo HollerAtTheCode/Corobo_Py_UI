@@ -6,7 +6,7 @@ class Tile:
 
 
     def __init__(self,ident, x, y, rotation):
-        self.imgs= [pygame.image.load(os.path.join('assets/', 'red_circle.png')), pygame.image.load(os.path.join('assets/', 'green_circle.png'))]  # images depents on valid or non valid pos (collision())
+        self.imgs = [pygame.image.load(os.path.join('assets/', 'red_circle.png')), pygame.image.load(os.path.join('assets/', 'green_circle.png'))]  # images depents on valid or non valid pos (collision())
         self.x = x
         self.y = y
         self.rotation = rotation
@@ -17,13 +17,14 @@ class Tile:
         self.img = pygame.transform.scale(self.img, (self.width -(self.width/2 + 45), self.height-(self.height/2 + 45)))
 
 
+
     def draw(self, win):
         '''
         Draws the tile on right pos
         :param win: surface
         :return: none
         '''
-        win.blit(self.img, (self.x, self.y))
+        win.blit(self.img, (self.x - self.width, self.y-self.height))
 
     def collision(self, x, y):
         '''
