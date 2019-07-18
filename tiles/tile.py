@@ -14,7 +14,7 @@ class Tile:
         self.height = 150 #px
         self.ident = ident
         self.img = self.imgs[1]  # input png url in assets
-       
+
 
 
 
