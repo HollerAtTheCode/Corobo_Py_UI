@@ -72,7 +72,7 @@ class Game:
         '''
         self.win.fill([255, 255, 255])
 
-        self.board.better_draw_board(self.win)
+        self.board.draw_board(self.win)
         '''
         redraw every tile every tick. Tile.draw(local window)
         '''
