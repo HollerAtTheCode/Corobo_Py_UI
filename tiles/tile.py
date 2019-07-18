@@ -10,8 +10,8 @@ class Tile:
         self.x = x
         self.y = y
         self.rotation = rotation
-        self.width = 150  # px
-        self.height = 150  # px
+        self.width = 132  # px
+        self.height = 132  # px
         self.ident = ident
         self.img = self.imgs[1]  # input png url in assets
 
@@ -21,7 +21,7 @@ class Tile:
         :param win: surface
         :return: none
         '''
-        win.blit(self.img, (self.x - self.width, self.y - self.height))
+        win.blit(self.img, (self.x - (self.width - 90)/2, self.y - (self.height-90)/2))
 
     def collision(self, x, y):
         '''
