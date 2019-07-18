@@ -12,7 +12,7 @@ class Board:
         self.NumberOfRows = 13
         self.NumberOfColumns = 20
         self.fields = {}
-        self.imgs= [pygame.image.load(os.path.join('assets/', 'EmptyGrass2_90px.png')), pygame.image.load(os.path.join('assets/', 'EmptyGrass_90px.png')), pygame.image.load(os.path.join('assets/', 'BlockedRock2_90px.png')), pygame.image.load(os.path.join('assets/', 'BlockedRock_90px.png'))]  # images depents on valid or non valid pos (collision())
+        self.imgs= [pygame.image.load(os.path.join('assets/', 'BlockedRock2_90px.png')), pygame.image.load(os.path.join('assets/', 'BlockedRock_90px.png'))]  # images depents on valid or non valid pos (collision())
 
 
     def generate_field_array(self):
@@ -84,7 +84,7 @@ class Board:
 
         for field in self.fields.values():
             if field.type == 3:  # red
-                win.blit(self.imgs[3], (field.x_px + x_offset, field.y_px + y_offset))
+                win.blit(self.imgs[0], (field.x_px + x_offset, field.y_px + y_offset))
 
     def draw_board(self,win):
 
@@ -99,23 +99,14 @@ class Board:
 
         for field in self.fields.values():
             if field.type == 1:  # blue
-                # win.blit(self.imgs[1], (field.x_px + x_offset, field.y_px + y_offset))
                 pygame.draw.rect(win, blue, [field.x_px + x_offset, field.y_px + y_offset, field.width, field.height])
                 pygame.draw.rect(win, black, [field.x_px + x_offset, field.y_px + y_offset, field.width, field.height], 1)
             elif field.type == 2:  # green
-                image_number = 0
-                if random.randrange(1, 100) > 50:
-                    image_number = 0
-                else:  # red
-                    image_number = 1
-                win.blit(self.imgs[image_number], (field.x_px + x_offset, field.y_px + y_offset))
+                pygame.draw.rect(win, green, [field.x_px + x_offset, field.y_px + y_offset, field.width, field.height])
+                pygame.draw.rect(win, black, [field.x_px + x_offset, field.y_px + y_offset, field.width, field.height], 1)
             elif field.type == 3:  # red
-                image_number = 0
-                if random.randrange(1, 100) > 50:
-                    image_number = 2
-                else:  # red
-                    image_number = 3
-                win.blit(self.imgs[image_number], (field.x_px + x_offset, field.y_px + y_offset))
+                # win.blit(self.imgs[0], (field.x_px + x_offset, field.y_px + y_offset))
+                win.blit(self.imgs[0], (field.x_px + x_offset, field.y_px + y_offset))
             else:  # white
                 # win.blit(self.imgs[0], (field.x_px + x_offset, field.y_px + y_offset))
                 pygame.draw.rect(win, white, [field.x_px + x_offset, field.y_px + y_offset, field.width, field.height])
