@@ -7,6 +7,7 @@ import tuio
 
 class Listener(tuio.observer.AbstractListener):
 
+    '''Wieso nicht updaten statt zu löschen und neu einzufügen ?'''
     # Implements a Listener
     def notify(self, event):
         ident = event.object.id
@@ -21,43 +22,44 @@ class Listener(tuio.observer.AbstractListener):
 
 class Game:
 
-
     def __init__(self):
 
         self.info_objekt = pygame.display.Info()
-        self.width = self.info_objekt.current_w  # height of field from OS--- getSize oder so
-        self.height = self.info_objekt.current_h
-        self.win = pygame.display.set_mode((self.width, self.height), pygame.FULLSCREEN | pygame.HWSURFACE)
-        self.board = Board(self.width, self.height)
+        self.width = self.info_objekt.current_w  # width of field from os
+        self.height = self.info_objekt.current_h # width of field from os
+        self.win = pygame.display.set_mode((self.width, self.height), pygame.FULLSCREEN | pygame.HWSURFACE) # Game window
+        self.board = Board(self.width, self.height) # Instance of the class Board
         self.tiles = {}  # contains every tile on the field
-        self.poses = {}  # contains the current poses of every tile on the field
+        self.poses = {}  # contains the current poses of every tile on the field -> Key is marker id and value: [X-Pos,Y-Pos,Rotation-Angle]
 
     def run(self):
         '''
         gameloop
         :return: none
         '''
+        # Generate a GameBoard and save it in the board instance
         self.board.generate_field_array()
         run = True
+        # create a Object to help track time
         clock = pygame.time.Clock()
 
 
         while run:
-            clock.tick(90)  # fps = 60
+            clock.tick(60)  # fps = 60
             tuio.tracking.update()  # update for the Tuiolistener
             if len(self.poses) != 0:
-                for key in self.poses:
-                    temp = self.poses[key]  # the curren pose of the 'key', which is the same as in tiles
-                    if key not in self.tiles:  # checks if the tile is already existing if not it'll be created
+                for key in self.poses: # Iterate all poses
+                    temp = self.poses[key] # initialize temp with the value of the current pose
+                    if key not in self.tiles: # checks if the tile is already existing if not it'll be created
                         self.create_tile(key, temp[0] * self.width, temp[1] * self.height, temp[2])
                         print('new Tile: ', key)
                     else:
                         self.tiles[key].update(temp[0] * self.width, temp[1] * self.height)
             events = pygame.event.get()
             for event in events:
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_q:
-                        pygame.quit()
+                if event.type == pygame.KEYDOWN: # check if a Key is pressed
+                    if event.key == pygame.K_q: # If so and the pressed Key is "q"
+                        pygame.quit() # -> quit the game
                         exit()
 
             self.draw()
