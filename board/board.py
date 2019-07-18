@@ -13,8 +13,8 @@ class Board:
         self.NumberOfRows = 13
         self.NumberOfColumns = 20
         self.fields = {}
-        self.imgs = [pygame.image.load(os.path.join('assets/', 'road_block_1.png')), pygame.image.load(os.path.join('assets/', 'road_block_2.png')), pygame.image.load(os.path.join('assets/', 'background.png'))]  # images depents on valid or non valid pos (collision())
-
+        self.imgs = [pygame.image.load('./assets/road_block_1.png').convert_alpha(), pygame.image.load(os.path.join('assets/', 'road_block_2.png')), pygame.image.load(os.path.join('assets/', 'background.png'))]  # images depents on valid or non valid pos (collision())
+        self.bg = pygame.image.load('./assets/background.png').convert_alpha()
 
     def generate_field_array(self):
         '''
@@ -87,5 +87,8 @@ class Board:
             if field.type == 3:  # red
                 win.blit(self.imgs[0], (field.x_px, field.y_px))
     def better_draw_board(self, win):
-        bg = pygame.image.load('./assets/background.png')
-        bg.set_clip(pygame.Rect())
+
+        win.blit(self.bg,(60,15))
+        for field in self.fields.values():
+            if field.type == 3:  # red
+                win.blit(self.imgs[0], (field.x_px, field.y_px))

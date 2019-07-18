@@ -44,6 +44,7 @@ class Tile:
         .... get input X and Y and move the tile obj.
         '''
         self.x = new_x
+        print(new_x ,'= X    ', new_y ,'= Y' )
         self.y = new_y
         # self.rotation = new_rotation -> rotation still missing
 

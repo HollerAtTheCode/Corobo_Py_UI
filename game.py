@@ -43,7 +43,7 @@ class Game:
 
 
         while run:
-            clock.tick(30)  # fps = 60
+            clock.tick(90)  # fps = 60
             tuio.tracking.update()  # update for the Tuiolistener
             if len(self.poses) != 0:
                 for key in self.poses:
@@ -70,7 +70,7 @@ class Game:
         '''
         self.win.fill([255, 255, 255])
 
-        self.board.draw_board(self.win)
+        self.board.better_draw_board(self.win)
         '''
         redraw every tile every tick. Tile.draw(local window)
         '''
