@@ -6,15 +6,15 @@ class Tile:
 
 
     def __init__(self,ident, x, y, rotation):
-        self.imgs = [pygame.image.load(os.path.join('assets/', 'red_circle.png')), pygame.image.load(os.path.join('assets/', 'border_straigt.png'))]  # images depents on valid or non valid pos (collision())
+        self.imgs = [pygame.image.load(os.path.join('assets/', 'border_curveq.png')), pygame.image.load(os.path.join('assets/', 'border_straigt.png'))]  # images depents on valid or non valid pos (collision())
         self.x = x
         self.y = y
         self.rotation = rotation
-        self.width = 45 #px
-        self.height = 45 #px
+        self.width = 150 #px
+        self.height = 150 #px
         self.ident = ident
         self.img = self.imgs[1]  # input png url in assets
-        self.img = pygame.transform.scale(self.img, (self.width -(self.width/2 + 45), self.height-(self.height/2 + 45)))
+       
 
 
 
