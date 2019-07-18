@@ -1,4 +1,5 @@
 import os
+import sys
 import pygame
 import random
 from .field import Field
@@ -12,7 +13,7 @@ class Board:
         self.NumberOfRows = 13
         self.NumberOfColumns = 20
         self.fields = {}
-        self.imgs= [pygame.image.load(os.path.join('assets/', 'road_block_1.png')), pygame.image.load(os.path.join('assets/', 'road_block_2.png')), pygame.image.load(os.path.join('assets/', 'background.png'))]  # images depents on valid or non valid pos (collision())
+        self.imgs = [pygame.image.load(os.path.join('assets/', 'road_block_1.png')), pygame.image.load(os.path.join('assets/', 'road_block_2.png')), pygame.image.load(os.path.join('assets/', 'background.png'))]  # images depents on valid or non valid pos (collision())
 
 
     def generate_field_array(self):
@@ -79,17 +80,12 @@ class Board:
 
     def draw_board(self,win):
 
-        x_offset = (self.width-self.NumberOfColumns*90)/2 #60px
-        y_offset = (self.height-self.NumberOfRows*90)/2   #15px
-
-        red = (255, 0, 0)
-        green = (0, 255, 255)
-        blue = (0, 0, 255)
-        white = (255, 255, 255)
-        black = (0, 0, 0)
 
         win.blit(self.imgs[2], (60, 15))
 
         for field in self.fields.values():
             if field.type == 3:  # red
                 win.blit(self.imgs[0], (field.x_px, field.y_px))
+    def better_draw_board(self, win):
+        bg = pygame.image.load('./assets/background.png')
+        bg.set_clip(pygame.Rect())

@@ -20,13 +20,14 @@ class Listener(tuio.observer.AbstractListener):
 
 
 class Game:
-    pygame.init()
+
+
     def __init__(self):
 
         self.info_objekt = pygame.display.Info()
         self.width = self.info_objekt.current_w  # height of field from OS--- getSize oder so
         self.height = self.info_objekt.current_h
-        self.win = pygame.display.set_mode((self.width, self.height),pygame.FULLSCREEN|pygame.HWSURFACE)
+        self.win = pygame.display.set_mode((self.width, self.height), pygame.FULLSCREEN | pygame.HWSURFACE)
         self.board = Board(self.width, self.height)
         self.tiles = {}  # contains every tile on the field
         self.poses = {}  # contains the current poses of every tile on the field
@@ -39,8 +40,10 @@ class Game:
         self.board.generate_field_array()
         run = True
         clock = pygame.time.Clock()
+
+
         while run:
-            clock.tick(60)  # fps = 60
+            clock.tick(30)  # fps = 60
             tuio.tracking.update()  # update for the Tuiolistener
             if len(self.poses) != 0:
                 for key in self.poses:
@@ -50,15 +53,12 @@ class Game:
                         print('new Tile: ', key)
                     else:
                         self.tiles[key].update(temp[0] * self.width, temp[1] * self.height)
-            # print(len(self.poses), self.poses)
-
             events = pygame.event.get()
             for event in events:
                 if event.type == pygame.KEYDOWN:
-                    if event.key==pygame.K_q:
+                    if event.key == pygame.K_q:
                         pygame.quit()
                         exit()
-
 
             self.draw()
         pygame.quit()
@@ -69,6 +69,7 @@ class Game:
         :return: none
         '''
         self.win.fill([255, 255, 255])
+
         self.board.draw_board(self.win)
         '''
         redraw every tile every tick. Tile.draw(local window)
@@ -94,5 +95,7 @@ class Game:
         self.tiles[name] = ident
 
 
+pygame.init()
 g = Game()
+
 g.run()
