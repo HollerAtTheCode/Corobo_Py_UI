@@ -12,7 +12,7 @@ class Board:
         self.NumberOfRows = 13
         self.NumberOfColumns = 20
         self.fields = {}
-        self.imgs= [pygame.image.load(os.path.join('assets/', 'BlockedRock2.png')), pygame.image.load(os.path.join('assets/', 'BlockedRock.png'))]  # images depents on valid or non valid pos (collision())
+        self.imgs= [pygame.image.load(os.path.join('assets/', 'road_block_1.png')), pygame.image.load(os.path.join('assets/', 'road_block_2.png'))]  # images depents on valid or non valid pos (collision())
 
 
     def generate_field_array(self):
