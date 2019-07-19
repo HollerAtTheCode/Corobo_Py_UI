@@ -16,8 +16,6 @@ class Brick:
         self.ident = ident
 		#self.tile_id = pygame.
         self.img = self.imgs[1]  # input png url in assets
-        self.img = pygame.transform.scale(self.img,(self.width - (self.width / 2 + 45), self.height - (self.height / 2 + 45)))
-
 		#Changed need to be tested
         self.field_id = ""
 		#Type 1 is curve- type 0 is straightelement
@@ -30,7 +28,8 @@ class Brick:
         :param win: surface
         :return: none
         '''
-        win.blit(self.img, (self.x - (self.width - 90)/2, self.y - (self.height-90)/2))
+        rotated_img = pygame.transform.rotate(self.img, self.rotation)
+        win.blit(rotated_img, (self.x - (self.width - 90)/2, self.y - (self.height-90)/2))
 
     def collision(self, x, y):
         '''
@@ -44,7 +43,7 @@ class Brick:
                 return True
         return False
 
-    def update(self, new_x, new_y):
+    def update(self, new_x, new_y,angle):
         '''
         Repos this tile by contoller input
         :param new_y: int or float ... depents on Tuio input
@@ -52,8 +51,9 @@ class Brick:
         :return: none
         .... get input X and Y and move the tile obj.
         '''
+        self.rotation = angle
         self.x = new_x
-        print(new_x ,'= X    ', new_y ,'= Y' )
+        print(new_x ,'= X    ', new_y ,'= Y', angle, '= Rotate Angle')
         self.y = new_y
         self.field_id = self.assign_field_id_to_brick(new_x, new_y)
         # self.rotation = new_rotation -> rotation still missing

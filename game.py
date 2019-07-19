@@ -27,13 +27,13 @@ class Game:
         self.info_objekt = pygame.display.Info()
         # width and height of field
         self.width = self.info_objekt.current_w
-        self.height = self.info_objekt.current_h 
+        self.height = self.info_objekt.current_h
         self.win = pygame.display.set_mode((self.width, self.height), pygame.FULLSCREEN | pygame.HWSURFACE) # Game window
         self.board = Board(self.width, self.height) # Instance of the class Board
         # contains every brick on the field
-        self.bricks = {}  
+        self.bricks = {}
         # contains the current poses of every brick on the field -> Key is marker id and value: [X-Pos,Y-Pos,Rotation-Angle]
-        self.poses = {}  
+        self.poses = {}
 
     def run(self):
         '''
@@ -57,7 +57,7 @@ class Game:
                         self.create_brick(key, temp[0] * self.width, temp[1] * self.height, temp[2])
                         # print('new Tile rotation: ', temp[2])
                     else:
-                        self.bricks[key].update(temp[0] * self.width, temp[1] * self.height)
+                        self.bricks[key].update(temp[0] * self.width, temp[1] * self.height, temp[2])
             events = pygame.event.get()
             for event in events:
                 if event.type == pygame.KEYDOWN: # check if a Key is pressed
