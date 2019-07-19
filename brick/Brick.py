@@ -2,27 +2,27 @@ import os
 import pygame
 
 
-class Tile:
+class Brick:
 
     def __init__(self, ident, x, y, rotation):
 
+        # self.imgs = [pygame.image.load(os.path.join('assets/', 'border_curve.png')), pygame.image.load(
+        # os.path.join('assets/', 'border_straight.png'))]  # images depents on valid or non valid pos (collision())
+        # self.x = x
+        # self.y = y
+        # self.rotation = rotation
+        # self.width = 132  # px
+        # self.height = 132  # px
+        # self.ident = ident
+        # self.img = self.imgs[1]  # input png url in assets
+
         self.imgs = [pygame.image.load(os.path.join('assets/', 'border_curve.png')), pygame.image.load(
-            os.path.join('assets/', 'border_straight.png'))]  # images depents on valid or non valid pos (collision())
+        os.path.join('assets/', 'border_straight.png'))]  # images depents on valid or non valid pos (collision())
         self.x = x
         self.y = y
         self.rotation = rotation
         self.width = 132  # px
         self.height = 132  # px
-        self.ident = ident
-        self.img = self.imgs[1]  # input png url in assets
-
-        self.imgs = [pygame.image.load(os.path.join('assets/', 'red_circle.png')), pygame.image.load(
-            os.path.join('assets/', 'green_circle.png'))]  # images depents on valid or non valid pos (collision())
-        self.x = x
-        self.y = y
-        self.rotation = rotation
-        self.width = 500  # px
-        self.height = 500  # px
         self.ident = ident
         self.img = self.imgs[1]  # input png url in assets
         self.img = pygame.transform.scale(self.img,

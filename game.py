@@ -1,14 +1,14 @@
 import pygame
 import os
-from tiles.tile import Tile
+from brick.Brick import Brick
 from board.board import Board
 import tuio
 
 
 class Listener(tuio.observer.AbstractListener):
 
-    '''Wieso nicht updaten statt zu loeschen und neu einzufuegen ?'''
-    # Implements a Listener
+    #Why dont we update instead of deleting and creating an element anew
+    #Implements a Listener
     def notify(self, event):
         ident = event.object.id
         if ident in g.poses:
@@ -25,12 +25,15 @@ class Game:
     def __init__(self):
 
         self.info_objekt = pygame.display.Info()
-        self.width = self.info_objekt.current_w  # width of field from os
-        self.height = self.info_objekt.current_h # width of field from os
+        # width and height of field
+        self.width = self.info_objekt.current_w
+        self.height = self.info_objekt.current_h 
         self.win = pygame.display.set_mode((self.width, self.height), pygame.FULLSCREEN | pygame.HWSURFACE) # Game window
         self.board = Board(self.width, self.height) # Instance of the class Board
-        self.tiles = {}  # contains every tile on the field
-        self.poses = {}  # contains the current poses of every tile on the field -> Key is marker id and value: [X-Pos,Y-Pos,Rotation-Angle]
+        # contains every brick on the field
+        self.bricks = {}  
+        # contains the current poses of every brick on the field -> Key is marker id and value: [X-Pos,Y-Pos,Rotation-Angle]
+        self.poses = {}  
 
     def run(self):
         '''
@@ -50,11 +53,11 @@ class Game:
             if len(self.poses) != 0:
                 for key in self.poses: # Iterate all poses
                     temp = self.poses[key] # initialize temp with the value of the current pose
-                    if key not in self.tiles: # checks if the tile is already existing if not it'll be created
-                        self.create_tile(key, temp[0] * self.width, temp[1] * self.height, temp[2])
+                    if key not in self.bricks: # checks if the tile is already existing if not it'll be created
+                        self.create_brick(key, temp[0] * self.width, temp[1] * self.height, temp[2])
                         # print('new Tile rotation: ', temp[2])
                     else:
-                        self.tiles[key].update(temp[0] * self.width, temp[1] * self.height)
+                        self.bricks[key].update(temp[0] * self.width, temp[1] * self.height)
             events = pygame.event.get()
             for event in events:
                 if event.type == pygame.KEYDOWN: # check if a Key is pressed
@@ -76,15 +79,15 @@ class Game:
         '''
         redraw every tile every tick. Tile.draw(local window)
         '''
-        for k, v in self.tiles.items():
-            temp_tile = v
-            temp_tile.draw(self.win)
+        for k, v in self.bricks.items():
+            temp_brick = v
+            temp_brick.draw(self.win)
 
         pygame.display.update()
 
     listener = Listener("Event Listener", tuio.getEventManager())
 
-    def create_tile(self, name, pos_x, pos_y, rot):
+    def create_brick(self, name, pos_x, pos_y, rot):
         '''
         crates new instance of class Tile and adds ot to the tiles dict.
         :param name: ident of tile
@@ -93,8 +96,8 @@ class Game:
         :param rot: int
         :return: none
         '''
-        ident = Tile(name, pos_x, pos_y, rot)
-        self.tiles[name] = ident
+        ident = Brick(name, pos_x, pos_y, rot)
+        self.bricks[name] = ident
 
 
 pygame.init()
