@@ -6,10 +6,8 @@ class Brick:
 
     def __init__(self, ident, x, y, rotation):
 
-
-
-        self.imgs = [pygame.image.load(os.path.join('assets/', 'border_curve.png')), pygame.image.load(
-        os.path.join('assets/', 'border_straight.png'))]  # images depents on valid or non valid pos (collision())
+        self.imgs = [pygame.image.load(os.path.join('assets/', 'border_curve.png')).convert_alpah(), pygame.image.load(
+        os.path.join('assets/', 'border_straight.png')).convert_alpah()]  # images depents on valid or non valid pos (collision())
         self.x = x
         self.y = y
         self.rotation = rotation
