@@ -1,22 +1,27 @@
 import os
 import pygame
-
+from math import *
 
 class Brick:
 
     def __init__(self, ident, x, y, rotation):
 
-        self.imgs = [pygame.image.load(os.path.join('assets/', 'border_curve.png')).convert_alpah(), pygame.image.load(
-        os.path.join('assets/', 'border_straight.png')).convert_alpah()]  # images depents on valid or non valid pos (collision())
+        self.imgs = [pygame.image.load(os.path.join('assets/', 'border_curve.png')), pygame.image.load(
+        os.path.join('assets/', 'border_straight.png'))]  # images depents on valid or non valid pos (collision())
         self.x = x
         self.y = y
         self.rotation = rotation
         self.width = 132  # px
         self.height = 132  # px
         self.ident = ident
+		#self.tile_id = pygame.
         self.img = self.imgs[1]  # input png url in assets
-        self.img = pygame.transform.scale(self.img,
-                                          (self.width - (self.width / 2 + 45), self.height - (self.height / 2 + 45)))
+        self.img = pygame.transform.scale(self.img,(self.width - (self.width / 2 + 45), self.height - (self.height / 2 + 45)))
+
+		#Changed need to be tested
+        self.field_id = ""
+		#Type 1 is curve- type 0 is straightelement
+        self.type = ident % 2
 
 
     def draw(self, win):
@@ -50,12 +55,26 @@ class Brick:
         self.x = new_x
         print(new_x ,'= X    ', new_y ,'= Y' )
         self.y = new_y
+        self.field_id = self.assign_field_id_to_brick(new_x, new_y)
         # self.rotation = new_rotation -> rotation still missing
 
     def remove(self):
-        '''
-        Remove this Tile
-        :return: none
-        '''
         self.x = 0
         self.y = 0
+
+    def assign_field_id_to_brick(self, pos_x, pos_y):
+	    #Array that hols column index
+        alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T']
+		#calculate column char
+        print("Aktueller Index: "+str(int((pos_x - 60) / 90)))
+        char_column = alphabet[int((pos_x - 60) / 90)]
+		#calculate row number
+        digit_row = int((pos_y - 15) / 90)
+		#generate field id
+        return (char_column + str(digit_row))
+    #changed
+    def get_type(self):
+		return self.type
+#changed
+    def get_assigned_field_id(self):
+		return self.field_id
