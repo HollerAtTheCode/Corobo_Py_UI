@@ -35,16 +35,17 @@ class Board:
 
                     self.generate_field(x, y, 1)
                 # first and second row of playarea
-                elif 2 < x < 17 and 5 < y < 8:  # green
-                    if random.randrange(1, 100) > 10:
+                elif 2 < x < 17 and 5 < y < 8:
+                    # random placement of forbidden fields in the playarea
+                    if random.randrange(1, 100) > 10: # green
                         self.generate_field(x, y, 2)
 
                     else:  # red
                         self.generate_field(x, y, 3)
 
                 # third row of playarea
-                elif 3 < x < 16 and y == 8:  # green
-                    if random.randrange(1, 100) > 10:
+                elif 3 < x < 16 and y == 8:
+                    if random.randrange(1, 100) > 10: # green
                         self.generate_field(x, y, 2)
 
                     else:  # red
@@ -72,16 +73,19 @@ class Board:
 
 
     def generate_field(self, x, y, type):
+        # generate IDs for all fields, like on  a chess board. The letters are horizontal, the numbers are vertical
         alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T']
         ident = alphabet[x] + str(y)
+        # add new field to the field array
         temp_field = Field(ident, x, y, type)
         self.fields.update({ident: temp_field})
 
 
 
     def draw_board(self, win):
-
+        # draw the background image
         win.blit(self.bg,(60,15))
+        # draw the forbidden fields in the play area
         for field in self.fields.values():
             if field.type == 3:  # red
                 win.blit(self.imgs[0], (field.x_px, field.y_px))

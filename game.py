@@ -52,7 +52,7 @@ class Game:
                     temp = self.poses[key] # initialize temp with the value of the current pose
                     if key not in self.tiles: # checks if the tile is already existing if not it'll be created
                         self.create_tile(key, temp[0] * self.width, temp[1] * self.height, temp[2])
-                        print('new Tile: ', key)
+                        # print('new Tile rotation: ', temp[2])
                     else:
                         self.tiles[key].update(temp[0] * self.width, temp[1] * self.height)
             events = pygame.event.get()
