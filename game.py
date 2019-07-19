@@ -7,7 +7,7 @@ import tuio
 
 class Listener(tuio.observer.AbstractListener):
 
-    '''Wieso nicht updaten statt zu löschen und neu einzufügen ?'''
+    '''Wieso nicht updaten statt zu loeschen und neu einzufuegen ?'''
     # Implements a Listener
     def notify(self, event):
         ident = event.object.id
