@@ -62,7 +62,7 @@ class Board:
         # 90% probability of a playable field
         if random.randrange(1, 100) > 10:
             self.generate_field(x, y, 2)
-        # blocked field
+        # 10% probability of blocked field
         else:
             self.generate_field(x, y, 3)
 
