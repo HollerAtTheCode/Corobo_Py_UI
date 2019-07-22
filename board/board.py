@@ -35,7 +35,7 @@ class Board:
                 if 7 < x < 12 and y < 4:
                     self.generate_field(x, y, 1)
                 # first and second row of playarea
-                elif 2 < x < 17 and 5 < y < 8:
+                elif 3 < x < 16 and 5 < y < 8:
                     # random placement of forbidden fields in the playarea
                     self.generate_playarea_field(x, y)
                 # third row of playarea
@@ -60,7 +60,7 @@ class Board:
         :return: none
         '''
         # 90% probability of a playable field
-        if random.randrange(1, 100) > 10:
+        if random.randrange(1, 100) > 3:
             self.generate_field(x, y, 2)
         # 10% probability of blocked field
         else:
