@@ -63,18 +63,18 @@ class Brick:
         self.y = 0
 
     def assign_field_id_to_brick(self, pos_x, pos_y):
-	    #Array that hols column index
+        #Array that hols column index
         alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T']
-		#calculate column char
+        #calculate column char
         print("Aktueller Index: "+str(int((pos_x - 60) / 90)))
         char_column = alphabet[int((pos_x - 60) / 90)]
-		#calculate row number
+        #calculate row number
         digit_row = int((pos_y - 15) / 90)
-		#generate field id
+        #generate field id
         return (char_column + str(digit_row))
-    #changed
+        #changed
     def get_type(self):
-		return self.type
+        return self.type
 #changed
     def get_assigned_field_id(self):
-		return self.field_id
+        return self.field_id
