@@ -2,6 +2,7 @@ import pygame
 import os
 from brick.Brick import Brick
 from board.board import Board
+from logic.PlayerLogic import PlayerLogic
 import tuio
 
 
@@ -23,7 +24,6 @@ class Listener(tuio.observer.AbstractListener):
 class Game:
 
     def __init__(self):
-
         self.info_objekt = pygame.display.Info()
         # width and height of field
         self.width = self.info_objekt.current_w
@@ -34,6 +34,9 @@ class Game:
         self.bricks = {}
         # contains the current poses of every brick on the field -> Key is marker id and value: [X-Pos,Y-Pos,Rotation-Angle]
         self.poses = {}
+
+        #PlayerLogic
+        playerLogic = PlayerLogic
 
     def run(self):
         '''
@@ -46,6 +49,7 @@ class Game:
         # create a Object to help track time
         clock = pygame.time.Clock()
 
+        current_Brick = None
 
         while run:
             clock.tick(60)  # fps = 60
@@ -54,10 +58,14 @@ class Game:
                 for key in self.poses: # Iterate all poses
                     temp = self.poses[key] # initialize temp with the value of the current pose
                     if key not in self.bricks: # checks if the tile is already existing if not it'll be created
-                        self.create_brick(key, temp[0] * self.width, temp[1] * self.height, temp[2])
+                        if(current_Brick is not None):
+                            playerLogic.setPrev_Bricks(current_Brick)
+                        current_Brick = self.create_brick(key, temp[0] * self.width, temp[1] * self.height, temp[2])
                         # print('new Tile rotation: ', temp[2])
                     else:
                         self.bricks[key].update(temp[0] * self.width, temp[1] * self.height, temp[2])
+                    if(playerLogic.completeCheck(current_Brick)):
+                        self.bricks[current_Brick.ident].setImage("yellow")
             events = pygame.event.get()
             for event in events:
                 if event.type == pygame.KEYDOWN: # check if a Key is pressed
@@ -66,6 +74,8 @@ class Game:
                         exit()
 
             self.draw()
+
+
         pygame.quit()
 
     def draw(self):
@@ -98,6 +108,7 @@ class Game:
         '''
         ident = Brick(name, pos_x, pos_y, rot)
         self.bricks[name] = ident
+        return ident
 
 
 pygame.init()

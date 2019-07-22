@@ -7,7 +7,10 @@ class Brick:
     def __init__(self, ident, x, y, rotation):
 
         self.imgs = [pygame.image.load(os.path.join('assets/', 'border_straight.png')), pygame.image.load(
-        os.path.join('assets/', 'border_curve.png'))]  # images depents on valid or non valid pos (collision())
+        os.path.join('assets/', 'border_curve.png')), pygame.image.load(os.path.join('assets/', 'border_straight_yellow.png')),
+        pygame.image.load(os.path.join('assets/', 'border_curve_yellow.png')),
+        pygame.image.load(os.path.join('assets/', 'border_straight_red.png')),
+        pygame.image.load(os.path.join('assets/', 'border_curve_red.png'))]  # images depents on valid or non valid pos (collision())
         self.x = x
         self.y = y
         self.rotation = rotation
@@ -61,6 +64,18 @@ class Brick:
     def remove(self):
         self.x = 0
         self.y = 0
+
+    def setImage(self,color):
+        if(color == "yellow"):
+            if(self.type == 1):
+                self.img = self.imgs[3]
+            else:
+                self.img = self.imgs[2]
+        if(color == "red"):
+            if(self.type == 1):
+                self.img = self.imgs[5]
+            else:
+                self.img = self.imgs[4]
 
     def assign_field_id_to_brick(self, pos_x, pos_y):
         #Array that hols column index
