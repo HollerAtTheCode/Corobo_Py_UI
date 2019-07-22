@@ -36,7 +36,7 @@ class Game:
         self.poses = {}
 
         #PlayerLogic
-        playerLogic = PlayerLogic
+        playerLogic = PlayerLogic()
 
     def run(self):
         '''
