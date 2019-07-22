@@ -36,7 +36,7 @@ class Game:
         self.poses = {}
 
         #PlayerLogic
-        playerLogic = PlayerLogic()
+        self.playerLogic = PlayerLogic()
 
     def run(self):
         '''
@@ -59,12 +59,12 @@ class Game:
                     temp = self.poses[key] # initialize temp with the value of the current pose
                     if key not in self.bricks: # checks if the tile is already existing if not it'll be created
                         if(current_Brick is not None):
-                            playerLogic.setPrev_Bricks(current_Brick)
+                            self.playerLogic.setPrev_Bricks(current_Brick)
                         current_Brick = self.create_brick(key, temp[0] * self.width, temp[1] * self.height, temp[2])
                         # print('new Tile rotation: ', temp[2])
                     else:
                         self.bricks[key].update(temp[0] * self.width, temp[1] * self.height, temp[2])
-                    if(playerLogic.completeCheck(current_Brick)):
+                    if(self.playerLogic.completeCheck(current_Brick)):
                         self.bricks[current_Brick.ident].setImage("yellow")
             events = pygame.event.get()
             for event in events:
