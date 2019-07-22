@@ -1,5 +1,5 @@
 import pygame
-
+from brick.Brick import Brick
 class PlayerLogic:
 
     def __init__(self):
