@@ -6,20 +6,20 @@ class Brick:
 
     def __init__(self, ident, x, y, rotation):
 
-        self.imgs = [pygame.image.load(os.path.join('assets/', 'border_curve.png')), pygame.image.load(
-        os.path.join('assets/', 'border_straight.png'))]  # images depents on valid or non valid pos (collision())
+        self.imgs = [pygame.image.load(os.path.join('assets/', 'border_straight.png')), pygame.image.load(
+        os.path.join('assets/', 'border_curve.png'))]  # images depents on valid or non valid pos (collision())
         self.x = x
         self.y = y
         self.rotation = rotation
         self.width = 132  # px
         self.height = 132  # px
         self.ident = ident
-		#self.tile_id = pygame.
-        self.img = self.imgs[1]  # input png url in assets
 		#Changed need to be tested
         self.field_id = ""
 		#Type 1 is curve- type 0 is straightelement
         self.type = ident % 2
+        #self.tile_id = pygame.
+        self.img = self.imgs[self.type]  # input png url in assets
 
 
     def draw(self, win):
