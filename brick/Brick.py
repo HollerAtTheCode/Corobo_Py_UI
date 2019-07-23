@@ -24,6 +24,11 @@ class Brick:
         #self.tile_id = pygame.
         self.img = self.imgs[self.type]  # input png url in assets
 
+    def getCenterX(self):
+        return(self.x - self.width/2)
+
+    def getCenterY(self):
+        return(self.y - self.height/2 + 40)
 
     def draw(self, win):
         '''
@@ -32,7 +37,7 @@ class Brick:
         :return: none
         '''
         rotated_img = pygame.transform.rotate(self.img, self.rotation)
-        win.blit(rotated_img, (self.x - (self.width - 90)/2, self.y - (self.height-90)/2))
+        win.blit(rotated_img, (self.getCenterX(), self.getCenterY()))
 
     def collision(self, x, y):
         '''
@@ -71,20 +76,20 @@ class Brick:
                 self.img = self.imgs[3]
             else:
                 self.img = self.imgs[2]
-        if(color == "red"):
+        if(color == "white"):
             if(self.type == 1):
-                self.img = self.imgs[5]
+                self.img = self.imgs[1]
             else:
-                self.img = self.imgs[4]
+                self.img = self.imgs[0]
 
     def assign_field_id_to_brick(self, pos_x, pos_y):
         #Array that hols column index
         alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T']
         #calculate column char
-        print("Aktueller Index: "+str(int((pos_x - 60) / 90)))
-        char_column = alphabet[int((pos_x - 60) / 90)]
+        print("Aktueller Index: "+str(int(self.getCenterY() - 15) / 90 +2)," Y-Pos: ",self.getCenterY()," Y-Pos (int): ", int(self.getCenterY()))
+        char_column = alphabet[int(self.getCenterX() - 60) / 90 + 1]
         #calculate row number
-        digit_row = int((pos_y - 15) / 90)
+        digit_row = int((self.getCenterY() - 15) / 90) + 2
         #generate field id
         return (char_column + str(digit_row))
         #changed

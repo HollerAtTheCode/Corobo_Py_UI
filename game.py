@@ -59,13 +59,16 @@ class Game:
                     temp = self.poses[key] # initialize temp with the value of the current pose
                     if key not in self.bricks: # checks if the tile is already existing if not it'll be created
                         if(current_Brick is not None):
-                            self.playerLogic.setPrev_Bricks(current_Brick)
+                            self.playerLogic.setprev_Bricks(current_Brick)
                         current_Brick = self.create_brick(key, temp[0] * self.width, temp[1] * self.height, temp[2])
                         # print('new Tile rotation: ', temp[2])
                     else:
                         self.bricks[key].update(temp[0] * self.width, temp[1] * self.height, temp[2])
                     if(self.playerLogic.completeCheck(current_Brick)):
+                        print("\nTest PASSED! for Brick: ",current_Brick.ident,"\nField: ",current_Brick.field_id)
                         self.bricks[current_Brick.ident].setImage("yellow")
+                    else:
+                        self.bricks[current_Brick.ident].setImage("white")
             events = pygame.event.get()
             for event in events:
                 if event.type == pygame.KEYDOWN: # check if a Key is pressed

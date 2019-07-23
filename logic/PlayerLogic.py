@@ -1,17 +1,18 @@
 import pygame
 from brick.Brick import Brick
+
 class PlayerLogic:
 
     def __init__(self):
         #add Start Brick to prev Bricks
         startBrick = Brick(0,0,0,90)
-        startBrick.field_id = "C8"
+        startBrick.field_id = "F8"
         self.prev_Bricks = [startBrick]
 
     def setprev_Bricks(self,brick):
-        if(len(self.self.prev_Bricks) >= 2):
-            self.self.prev_Bricks.pop(0)
-        self.self.prev_Bricks.append(x)
+        if(len(self.prev_Bricks) >= 2):
+            self.prev_Bricks.pop(0)
+        self.prev_Bricks.append(brick)
 
     def completeCheck(self,brick):
         return self.tileIsConnected(brick)
@@ -19,13 +20,14 @@ class PlayerLogic:
 
 
     def isEndReached(self,brick):
-        if(brick.field_id == "O10"):
+        if(brick.field_id == "N9"):
             return True
         else:
             return False
 
 
     def tileIsConnected(self,brick):
+        print("tileIsConnected entered!")
         if(len(self.prev_Bricks)>=2):
             prevprev_Brick_fieldId = self.prev_Bricks[0].field_id
             prevprev_id_letter = prevprev_Brick_fieldId[0]
@@ -40,10 +42,14 @@ class PlayerLogic:
             #previous Brick is straight
             if(self.prev_Bricks[1].type == 0):
                 if(self.prev_Bricks[1].rotation >= 80 and self.prev_Bricks[1].rotation <= 90 or self.prev_Bricks[1].rotation <= -80 and self.prev_Bricks[1].rotation >= -90):
+                    print("prev Brick 90 Grad\nprevprev Brick: "+self.prev_Bricks[0].field_id+"\nprev Brick: "+self.prev_Bricks[1].field_id+ "\ncurrent Brick: "+brick.field_id)
                     if("".join(chr(ord(prevprev_id_letter)+1)+prevprev_id_number) == self.prev_Bricks[1].field_id): # If Bahn kommt von links
+                        print("Bahn kommt von links")
                         if("".join(chr(ord(prev_id_letter)+1)+prev_id_number) == field_id):
+                            print("Brick liegt richtig")
                             return True
                     else:
+                        print("Bahn kommt von rechts")
                         if("".join(chr(ord(prev_id_letter)-1)+prev_id_number) == field_id):
                             return True
 
