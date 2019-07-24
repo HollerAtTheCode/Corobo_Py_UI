@@ -59,7 +59,7 @@ class RobotLogic:
 
                 if(self.prev_Bricks[1].r_Rasterisiert == 0):
                     if("".join(prevprev_id_letter+str(int(prevprev_id_number)+1)) == prev_Brick_fieldId): #If Bahn kommt von Oben
-                        self.next_fieldID = "".join(chr(ord(prev_id_letter)-1)+prev_id_number)
+                        self.next_fieldID = "".join(chr(ord(prev_id_letter)+1)+prev_id_number)
                         self.directionFromPrevToCurrentBrick = "links"
                     else: #If Bahn kommt von rechts
                         self.next_fieldID = "".join(prevprev_id_letter+str(int(prevprev_id_number)-1))
