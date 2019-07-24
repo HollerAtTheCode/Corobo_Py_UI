@@ -68,6 +68,7 @@ class RobotLogic:
                 if(self.prev_Bricks[1].r_Rasterisiert == -180):
                     if("".join(chr(ord(prevprev_id_letter)+1)+prevprev_id_number) == self.prev_Bricks[1].field_id): # If Bahn kommt von links
                         self.field_id = "".join(prev_id_letter+str(int(prevprev_id_number)+1))
+                        print(self.field_id)
                         self.directionFromPrevToCurrentBrick = "unten"
                     else: # If Bahn kommt von unten
                         self.field_id = "".join(chr(ord(prev_id_letter)-1)+prev_id_number)
