@@ -66,7 +66,7 @@ class Brick:
         self.rotation = angle
         self.x = new_x
         #print(new_x ,'= X    ', new_y ,'= Y', angle, '= Rotate Angle')
-        print(angle, '= Rotate Angle')
+        #print(angle, '= Rotate Angle')
         self.y = new_y
         self.field_id = self.assign_field_id_to_brick(new_x, new_y)
         # self.rotation = new_rotation -> rotation still missing
@@ -91,7 +91,7 @@ class Brick:
 
     def assign_field_id_to_brick(self, pos_x, pos_y):
         #calculate column char
-        print("Aktueller Index: "+str(int(self.getCenterY() - 15) / 90 +2)," Y-Pos: ",self.getCenterY()," Y-Pos (int): ", int(self.getCenterY()))
+        #print("Aktueller Index: "+str(int(self.getCenterY() - 15) / 90 +2)," Y-Pos: ",self.getCenterY()," Y-Pos (int): ", int(self.getCenterY()))
         char_column = self.alphabet[int(self.getCenterX() - 60) / 90 + 1]
         #calculate row number
         digit_row = int((self.getCenterY() - 15) / 90) + 2

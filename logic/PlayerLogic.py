@@ -40,14 +40,14 @@ class PlayerLogic:
             #previous Brick is straight
             if(self.prev_Bricks[1].type == 0):
                 if(self.prev_Bricks[1].rotation >= 80 and self.prev_Bricks[1].rotation <= 90 or self.prev_Bricks[1].rotation <= -80 and self.prev_Bricks[1].rotation >= -90):
-                    print("prev Brick 90 Grad\nprevprev Brick: "+self.prev_Bricks[0].field_id+"\nprev Brick: "+self.prev_Bricks[1].field_id+ "\ncurrent Brick: "+brick.field_id)
+                    #print("prev Brick 90 Grad\nprevprev Brick: "+self.prev_Bricks[0].field_id+"\nprev Brick: "+self.prev_Bricks[1].field_id+ "\ncurrent Brick: "+brick.field_id)
                     if("".join(chr(ord(prevprev_id_letter)+1)+prevprev_id_number) == self.prev_Bricks[1].field_id): # If Bahn kommt von links
-                        print("Bahn kommt von links")
+                        #print("Bahn kommt von links")
                         if("".join(chr(ord(prev_id_letter)+1)+prev_id_number) == field_id):
-                            print("Brick liegt richtig")
+                            #print("Brick liegt richtig")
                             return True
                     else:
-                        print("Bahn kommt von rechts")
+                        #print("Bahn kommt von rechts")
                         if("".join(chr(ord(prev_id_letter)-1)+prev_id_number) == field_id):
                             return True
 
@@ -80,15 +80,15 @@ class PlayerLogic:
                             return True
 
                 if(self.prev_Bricks[1].rotation >= -190 and self.prev_Bricks[1].rotation <= -170):
-                    print("Kurve von links nach unten")
+                    #print("Kurve von links nach unten")
                     if("".join(chr(ord(prevprev_id_letter)+1)+prevprev_id_number) == self.prev_Bricks[1].field_id): # If Bahn kommt von links
-                        print("Bahn geht nach unten")
+                        #print("Bahn geht nach unten")
                         if("".join(prev_id_letter+str(int(prevprev_id_number)+1)) == field_id):
-                            print("Brick liegt richtig")
+                            #print("Brick liegt richtig")
                             return True
                     else: # If Bahn kommt von unten
                         if("".join(chr(ord(prev_id_letter)-1)+prev_id_number) == field_id):
-                            print("Bahn geht nach links")
+                            #print("Bahn geht nach links")
                             return True
 
                 if(self.prev_Bricks[1].rotation >= -100 and self.prev_Bricks[1].rotation <= -80):

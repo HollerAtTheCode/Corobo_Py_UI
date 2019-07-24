@@ -32,11 +32,11 @@ class RobotLogic:
             #previous Brick is straight
             if(self.prev_Bricks[1].type == 0):
                 if(self.prev_Bricks[1].rotation >= 80 and self.prev_Bricks[1].rotation <= 90 or self.prev_Bricks[1].rotation <= -80 and self.prev_Bricks[1].rotation >= -90):
+                    print ("prevprev Index: ",prevprev_Brick_fieldId, "\nprev Index: ",prev_Brick_fieldId)
                     if("".join(chr(ord(prevprev_id_letter)+1)+prevprev_id_number) == self.prev_Bricks[1].field_id): # If Bahn kommt von links
                         self.next_fieldID = "".join(chr(ord(prev_id_letter)+1)+prev_id_number)
                         self.directionFromPrevToCurrentBrick = "rechts"
                     else:
-                        print("Bahn kommt von rechts")
                         self.next_fieldID = "".join(chr(ord(prev_id_letter)-1)+prev_id_number)
                         self.directionFromPrevToCurrentBrick = "links"
 
