@@ -107,9 +107,9 @@ class Brick:
         self.x_Rasterisiert = self.alphabet.index(id_letter) * 90 + 60 - (self.width - 90)/2
         self.y_Rasterisiert = (id_number-1) * 90 + 15 - (self.height - 90)/2
         #NOCH ZU UEBERPRUEFEN
-        if(self.rotation >= -45 and self.rotation <= 45):
+        if(self.rotation >= -20 and self.rotation <= 20):
             self.r_Rasterisiert = 0
-        elif(self.rotation >= 46 and self.rotation <= 135):
+        elif(self.rotation >= 70 and self.rotation <= 110):
             self.r_Rasterisiert = 90
         elif(self.rotation >= -200 and self.rotation <= -160):
             self.r_Rasterisiert = -180
