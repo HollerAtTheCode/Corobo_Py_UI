@@ -79,7 +79,7 @@ class Game:
 
                         elif(self.roundCounter%2 == 1):
                             self.robotLogic.setNextTile(current_Brick)
-                            self.robotLogic.updatePrevBricks(playerLogic.prev_Bricks)
+                            self.robotLogic.updatePrevBricks(self.playerLogic.prev_Bricks)
                             self.getNextFieldId()
 
                         self.roundCounter += 1
