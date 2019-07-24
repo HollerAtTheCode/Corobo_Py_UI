@@ -101,7 +101,7 @@ class RobotLogic:
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.connect(('192.168.178.107', 5001))
-            s.send(bytes(self.next_fieldID,"utf-8"))
+            s.send(bytes(self.next_fieldID))
             s.close()
         except Exception as e:
             print("Error:",e)
