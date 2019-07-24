@@ -11,11 +11,11 @@ class RobotLogic:
 
     def updatePrevBricks(bricks):
         self.prev_Bricks = bricks
-        return
+        return True
 
     def setNextTile(brick):
         self.nextBrick = brick
-        return
+        return True
 
     def getNextFieldId():
 
