@@ -34,8 +34,23 @@ class Board:
                 # fields occupied by the robot
                 if 7 < x < 12 and y < 4:
                     self.generate_field(x, y, 1)
+                elif 5<x<14 and y ==6:
+                    self.generate_block(x,y)
+                elif 5<x<14 and y ==9:
+                    self.generate_block(x,y)
+                    pass
+                elif x == 6 and 6<y<9:
+                    self.generate_block(x,y)
+                    pass
+                elif 11<x<14  and 6<y<9:
+                    self.generate_block(x,y)
+                    pass
+
+                # area around the playable area
+                else:  # outside of playarea
+                    self.generate_field(x, y, 0)
                 # first and second row of playarea
-                elif 3 < x < 16 and 5 < y < 8:
+                '''elif 3 < x < 16 and 5 < y < 8:
                     # random placement of forbidden fields in the playarea
                     self.generate_playarea_field(x, y)
                 # third row of playarea
@@ -46,10 +61,8 @@ class Board:
                     self.generate_playarea_field(x, y)
                 # fifth row of playarea
                 elif 6 < x < 13 and y == 10:  # green
-                    self.generate_playarea_field(x, y)
-                # area around the playable area
-                else:  # outside of playarea
-                    self.generate_field(x, y, 0)
+                    self.generate_playarea_field(x, y)'''
+
 
 
     def generate_playarea_field(self, x, y):
@@ -60,12 +73,14 @@ class Board:
         :return: none
         '''
         # 90% probability of a playable field
-        if random.randrange(1, 100) > 3:
-            self.generate_field(x, y, 2)
+        #if random.randrange(1, 100) > 3:
+        self.generate_field(x, y, 2)
         # 10% probability of blocked field
-        else:
-            self.generate_field(x, y, 3)
+        #else:
+            #self.generate_field(x, y, 3)
 
+    def generate_block(self,x,y):
+        self.generate_field(x,y,3)
 
     def generate_field(self, x, y, type):
         '''
