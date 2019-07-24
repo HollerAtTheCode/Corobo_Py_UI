@@ -73,6 +73,8 @@ class Brick:
         #Rasterisierung
         self.quantize()
 
+        print("Current Brick Rotation: ",self.r_Rasterisiert)
+
     def remove(self):
         self.x = 0
         self.y = 0
