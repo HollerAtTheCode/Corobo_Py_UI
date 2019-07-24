@@ -81,7 +81,9 @@ class Game:
                             self.robotLogic.setNextTile(current_Brick)
                             self.robotLogic.updatePrevBricks(self.playerLogic.prev_Bricks)
                             self.robotLogic.getNextFieldId()
+                            self.robotLogic.robotClient()
                             self.bricks[current_Brick.ident].setImage("yellow")
+
 
                         self.roundCounter += 1
 

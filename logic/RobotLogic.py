@@ -1,4 +1,5 @@
 import PlayerLogic
+import socket
 
 class RobotLogic:
 
@@ -83,7 +84,7 @@ class RobotLogic:
                         self.directionFromPrevToCurrentBrick = "unten"
             return
 
-    def getNextOrientation(self):
+    '''def getNextOrientation(self):
         if(nextBrick.type == 0): #straight
             if(self.directionFromPrevToCurrentBrick == "left" or self.directionFromPrevToCurrentBrick == "right"):
                 self.next_Rotation = 90
@@ -94,4 +95,11 @@ class RobotLogic:
             if(self.directionFromPrevToCurrentBrick == "left"):
                 pass
             if(self.directionFromPrevToCurrentBrick == "right"):
-                pass
+                pass'''
+
+        def robotClient(self):
+
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            s.connect(('192.168.178.48', 5001))
+            s.send(bytes(self.next_fieldID,"utf-8"))
+            s.close()
