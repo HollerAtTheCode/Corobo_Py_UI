@@ -19,7 +19,6 @@ class RobotLogic:
         return True
 
     def getNextFieldId(self):
-
         if(len(self.prev_Bricks)>=2):
             prevprev_Brick_fieldId = self.prev_Bricks[0].field_id
             prevprev_id_letter = prevprev_Brick_fieldId[0]
@@ -30,7 +29,7 @@ class RobotLogic:
             prev_id_number = prev_Brick_fieldId[1:]
 
             #previous Brick is straight
-            print ("prevprev Index: ",prevprev_Brick_fieldId, "\nprev Index: ",prev_Brick_fieldId)
+            print ("prevprev Index: ",prevprev_Brick_fieldId," Rotation: ",self.prev_Bricks[0].r_Rasterisiert ,"\nprev Index: ",prev_Brick_fieldId," Rotation: ",self.prev_Bricks[0].r_Rasterisiert)
             if(self.prev_Bricks[1].type == 0):
                 if(self.prev_Bricks[1].rotation >= 80 and self.prev_Bricks[1].rotation <= 90 or self.prev_Bricks[1].rotation <= -80 and self.prev_Bricks[1].rotation >= -90):
                     if("".join(chr(ord(prevprev_id_letter)+1)+prevprev_id_number) == self.prev_Bricks[1].field_id): # If Bahn kommt von links
