@@ -100,7 +100,7 @@ class RobotLogic:
         print("Socket oeffnen")
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            s.connect(('192.168.178.48', 5001))
+            s.connect(('192.168.178.107', 5001))
             s.send(bytes(self.next_fieldID,"utf-8"))
             s.close()
         except Exception as e:
