@@ -68,14 +68,13 @@ class Game:
 
                         if(self.roundCounter%2 == 0):
                             testPassed = False;
-                            while(testPassed == False):
-                                testPassed = self.playerLogic.completeCheck(current_Brick)
-                                if(testPassed):
-                                    print("\nTest PASSED! for Brick: ",current_Brick.ident,"\nField: ",current_Brick.field_id)
-                                    self.bricks[current_Brick.ident].setImage("yellow")
-                                else:
-                                    self.bricks[current_Brick.ident].setImage("white")
-                                print("rotation type: ",type(self.bricks[key].rotation))
+                            testPassed = self.playerLogic.completeCheck(current_Brick)
+                            if(testPassed):
+                                print("\nTest PASSED! for Brick: ",current_Brick.ident,"\nField: ",current_Brick.field_id)
+                                self.bricks[current_Brick.ident].setImage("yellow")
+                            else:
+                                self.bricks[current_Brick.ident].setImage("white")
+                            print("rotation type: ",type(self.bricks[key].rotation))
 
                         elif(self.roundCounter%2 == 1):
                             self.robotLogic.setNextTile(current_Brick)
