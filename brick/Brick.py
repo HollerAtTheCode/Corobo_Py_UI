@@ -5,7 +5,8 @@ from math import *
 class Brick:
 
     def __init__(self, ident, x, y, rotation):
-
+        #Array that hols column index
+        self.alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T']
         self.imgs = [pygame.image.load(os.path.join('assets/', 'border_straight.png')), pygame.image.load(
         os.path.join('assets/', 'border_curve.png')), pygame.image.load(os.path.join('assets/', 'border_straight_yellow.png')),
         pygame.image.load(os.path.join('assets/', 'border_curve_yellow.png')),
@@ -13,6 +14,9 @@ class Brick:
         pygame.image.load(os.path.join('assets/', 'border_curve_red.png'))]  # images depents on valid or non valid pos (collision())
         self.x = x
         self.y = y
+        self.x_Rasterisiert = x
+        self.y_Rasterisiert = y
+        self.r_Rasterisiert = rotation
         self.rotation = rotation
         self.width = 132  # px
         self.height = 132  # px
@@ -36,8 +40,8 @@ class Brick:
         :param win: surface
         :return: none
         '''
-        rotated_img = pygame.transform.rotate(self.img, self.rotation)
-        win.blit(rotated_img, (self.getCenterX(), self.getCenterY()))
+        rotated_img = pygame.transform.rotate(self.img, self.r_Rasterisiert)
+        win.blit(rotated_img, (self.x_Rasterisiert, self.y_Rasterisiert))
 
     def collision(self, x, y):
         '''
@@ -61,10 +65,13 @@ class Brick:
         '''
         self.rotation = angle
         self.x = new_x
-        print(new_x ,'= X    ', new_y ,'= Y', angle, '= Rotate Angle')
+        #print(new_x ,'= X    ', new_y ,'= Y', angle, '= Rotate Angle')
+        print(angle, '= Rotate Angle')
         self.y = new_y
         self.field_id = self.assign_field_id_to_brick(new_x, new_y)
         # self.rotation = new_rotation -> rotation still missing
+        #Rasterisierung
+        self.quantize()
 
     def remove(self):
         self.x = 0
@@ -83,16 +90,34 @@ class Brick:
                 self.img = self.imgs[0]
 
     def assign_field_id_to_brick(self, pos_x, pos_y):
-        #Array that hols column index
-        alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T']
         #calculate column char
         print("Aktueller Index: "+str(int(self.getCenterY() - 15) / 90 +2)," Y-Pos: ",self.getCenterY()," Y-Pos (int): ", int(self.getCenterY()))
-        char_column = alphabet[int(self.getCenterX() - 60) / 90 + 1]
+        char_column = self.alphabet[int(self.getCenterX() - 60) / 90 + 1]
         #calculate row number
         digit_row = int((self.getCenterY() - 15) / 90) + 2
         #generate field id
         return (char_column + str(digit_row))
-        #changed
+        #Rasterisierung
+
+    def quantize(self):
+        id_letter = self.field_id[0]
+        id_number = int(self.field_id[1:])
+        self.x_Rasterisiert = self.alphabet.index(id_letter) * 90 + 60 - (self.width - 90)/2
+        self.y_Rasterisiert = (id_number-1) * 90 + 15 - (self.height - 90)/2
+        #NOCH ZU UEBERPRUEFEN
+        if(self.rotation >= -45 and self.rotation <= 45):
+            self.r_Rasterisiert = 0
+        elif(self.rotation >= 46 and self.rotation <= 135):
+            self.r_Rasterisiert = 90
+        elif(self.rotation >= -200 and self.rotation <= -160):
+            self.r_Rasterisiert = -180
+        elif(self.rotation >= -110 and self.rotation <= -70):
+            self.r_Rasterisiert = -90
+
+
+
+
+
     def get_type(self):
         return self.type
 #changed

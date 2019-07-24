@@ -17,8 +17,6 @@ class PlayerLogic:
     def completeCheck(self,brick):
         return self.tileIsConnected(brick)
 
-
-
     def isEndReached(self,brick):
         if(brick.field_id == "N9"):
             return True
@@ -53,7 +51,7 @@ class PlayerLogic:
                         if("".join(chr(ord(prev_id_letter)-1)+prev_id_number) == field_id):
                             return True
 
-                elif(self.prev_Bricks[1].rotation >= -10 and self.prev_Bricks[1].rotation <= 10 or self.prev_Bricks[1].rotation <= -170 and self.prev_Bricks[1].rotation >= -180):
+                elif(self.prev_Bricks[1].rotation >= -10 and self.prev_Bricks[1].rotation <= 10 or self.prev_Bricks[1].rotation <= -170 and self.prev_Bricks[1].rotation >= -190):
                     if("".join(prevprev_id_letter+str(int(prevprev_id_number)+1)) == self.prev_Bricks[1].field_id): # If Bahn kommt von oben
                         if("".join(prev_id_letter+str(int(prevprev_id_number)+1)) == field_id):
                             return True
@@ -82,11 +80,15 @@ class PlayerLogic:
                             return True
 
                 if(self.prev_Bricks[1].rotation >= -190 and self.prev_Bricks[1].rotation <= -170):
+                    print("Kurve von links nach unten")
                     if("".join(chr(ord(prevprev_id_letter)+1)+prevprev_id_number) == self.prev_Bricks[1].field_id): # If Bahn kommt von links
+                        print("Bahn geht nach unten")
                         if("".join(prev_id_letter+str(int(prevprev_id_number)+1)) == field_id):
+                            print("Brick liegt richtig")
                             return True
                     else: # If Bahn kommt von unten
                         if("".join(chr(ord(prev_id_letter)-1)+prev_id_number) == field_id):
+                            print("Bahn geht nach links")
                             return True
 
                 if(self.prev_Bricks[1].rotation >= -100 and self.prev_Bricks[1].rotation <= -80):

@@ -3,6 +3,7 @@ import os
 from brick.Brick import Brick
 from board.board import Board
 from logic.PlayerLogic import PlayerLogic
+from logic.RobotLogic import RobotLogic
 import tuio
 
 
@@ -34,9 +35,12 @@ class Game:
         self.bricks = {}
         # contains the current poses of every brick on the field -> Key is marker id and value: [X-Pos,Y-Pos,Rotation-Angle]
         self.poses = {}
+        self.roundCounter = 0;
 
         #PlayerLogic
         self.playerLogic = PlayerLogic()
+        #RobotLogic
+        self.robotLogic = RobotLogic()
 
     def run(self):
         '''
@@ -61,14 +65,32 @@ class Game:
                         if(current_Brick is not None):
                             self.playerLogic.setprev_Bricks(current_Brick)
                         current_Brick = self.create_brick(key, temp[0] * self.width, temp[1] * self.height, temp[2])
+
+                        if(self.roundCounter%2 == 0):
+                            testPassed = False;
+                            while(testPassed == False):
+                                testPassed = self.playerLogic.completeCheck(current_Brick)
+                                if(testPassed):
+                                    print("\nTest PASSED! for Brick: ",current_Brick.ident,"\nField: ",current_Brick.field_id)
+                                    self.bricks[current_Brick.ident].setImage("yellow")
+                                else:
+                                    self.bricks[current_Brick.ident].setImage("white")
+                                print("rotation type: ",type(self.bricks[key].rotation))
+
+                        elif(self.roundCounter%2 == 1):
+                            self.robotLogic.setNextTile(current_Brick)
+                            self.robotLogic.updatePrevBricks(playerLogic.prev_Bricks)
+                            self.getNextFieldId()
+
+                        self.roundCounter += 1
+
                         # print('new Tile rotation: ', temp[2])
                     else:
                         self.bricks[key].update(temp[0] * self.width, temp[1] * self.height, temp[2])
-                    if(self.playerLogic.completeCheck(current_Brick)):
-                        print("\nTest PASSED! for Brick: ",current_Brick.ident,"\nField: ",current_Brick.field_id)
-                        self.bricks[current_Brick.ident].setImage("yellow")
-                    else:
-                        self.bricks[current_Brick.ident].setImage("white")
+
+
+
+
             events = pygame.event.get()
             for event in events:
                 if event.type == pygame.KEYDOWN: # check if a Key is pressed
