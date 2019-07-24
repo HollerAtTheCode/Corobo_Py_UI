@@ -6,7 +6,7 @@ class PlayerLogic:
     def __init__(self):
         #add Start Brick to prev Bricks
         startBrick = Brick(0,0,0,90)
-        startBrick.field_id = "F8"
+        startBrick.field_id = "G8"
         self.prev_Bricks = [startBrick]
 
     def setprev_Bricks(self,brick):
@@ -18,7 +18,7 @@ class PlayerLogic:
         return self.tileIsConnected(brick)
 
     def isEndReached(self,brick):
-        if(brick.field_id == "N9"):
+        if(brick.field_id == "L9"):
             return True
         else:
             return False
