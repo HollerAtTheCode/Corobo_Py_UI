@@ -99,6 +99,12 @@ class Game:
                     if event.key == pygame.K_q: # If so and the pressed Key is "q"
                         pygame.quit() # -> quit the game
                         exit()
+                    if event.key == pygame.K_e:
+                        pygame.init()
+                        g = Game()
+
+                        g.run()
+
 
             self.draw()
 
