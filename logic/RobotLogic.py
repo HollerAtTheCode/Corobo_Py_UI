@@ -9,15 +9,15 @@ class RobotLogic:
         self.prev_Bricks = []
         self.directionFromPrevToCurrentBrick = ""
 
-    def updatePrevBricks(bricks):
+    def updatePrevBricks(self,bricks):
         self.prev_Bricks = bricks
         return True
 
-    def setNextTile(brick):
+    def setNextTile(self,brick):
         self.nextBrick = brick
         return True
 
-    def getNextFieldId():
+    def getNextFieldId(self):
 
         if(len(self.prev_Bricks)>=2):
             prevprev_Brick_fieldId = self.prev_Bricks[0].field_id
