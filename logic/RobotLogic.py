@@ -81,7 +81,7 @@ class RobotLogic:
                     else: # if Bahn kommt von rechts
                         self.field_id = "".join(prev_id_letter+str(int(prev_id_number)+1))
                         self.directionFromPrevToCurrentBrick = "unten"
-            return
+            return ""
 
     '''def getNextOrientation(self):
         if(nextBrick.type == 0): #straight
@@ -96,9 +96,8 @@ class RobotLogic:
             if(self.directionFromPrevToCurrentBrick == "right"):
                 pass'''
 
-        def robotClient(self):
-
-            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            s.connect(('192.168.178.48', 5001))
-            s.send(bytes(self.next_fieldID,"utf-8"))
-            s.close()
+    def robotClient(self):
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.connect(('192.168.178.48', 5001))
+        s.send(bytes(self.next_fieldID,"utf-8"))
+        s.close()
