@@ -68,7 +68,7 @@ class RobotLogic:
                 if(self.prev_Bricks[1].r_Rasterisiert == -180):
                     if("".join(chr(ord(prevprev_id_letter)+1)+prevprev_id_number) == self.prev_Bricks[1].field_id): # If Bahn kommt von links
                         self.field_id = "".join(prev_id_letter+str(int(prevprev_id_number)+1))
-                        print(self.field_id)
+                        self.robotClient(self.field_Id)
                         self.directionFromPrevToCurrentBrick = "unten"
                     else: # If Bahn kommt von unten
                         self.field_id = "".join(chr(ord(prev_id_letter)-1)+prev_id_number)
@@ -96,12 +96,12 @@ class RobotLogic:
             if(self.directionFromPrevToCurrentBrick == "right"):
                 pass'''
 
-    def robotClient(self):
+    def robotClient(self,field_Id):
         print("Socket oeffnen")
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.connect(('192.168.178.107', 5001))
-            s.send(bytes(self.next_fieldID))
+            s.send(bytes(field_Id))
             s.close()
         except Exception as e:
             print("Error:",e)
